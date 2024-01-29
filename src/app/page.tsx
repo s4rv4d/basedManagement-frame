@@ -5,7 +5,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "BMFrame",
     description: "Based Management Gallery",
     openGraph: {
-      title: "Eventcaster RSVP test",
+      title: "Based Management Gallery",
       images: ["https://i.postimg.cc/Hnv39tmR/based-management.png"],
     },
     other: {
