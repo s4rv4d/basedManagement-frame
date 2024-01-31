@@ -5,15 +5,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import type { NextApiRequest, NextApiResponse } from "next";
-import {
-  fetchDataAndStore,
-  getPreviousIndex,
-  findIndexWithHighestTotalMints,
-  getNextIndex,
-} from "src/Helpers/helpers.ts";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-let postsArray = [];
+import type { NextApiRequest, NextApiResponse } from "next";
+import { fetchDataAndStore, getNextIndex } from "src/Helpers/helpers";
+
+let postsArray: any[];
 let currentIndex = 0;
 let totalCount = 0;
 let currentPost;
@@ -35,10 +32,12 @@ export default async function handler(
         return res.status(400).send("Invalid message");
       }
 
-      postsArray = await fetchDataAndStore();
+      postsArray = (await fetchDataAndStore()) ?? [];
       totalCount = postsArray.length;
 
-      if (buttonIndex === 1) {
+      if (param1 === "start") {
+        currentIndex = 0;
+      } else if (buttonIndex === 1) {
         currentIndex = getNextIndex(postsArray, currentIndex);
       } else if (buttonIndex === 2) {
         const selectedData = postsArray[currentIndex];
@@ -54,9 +53,7 @@ export default async function handler(
           "Location",
           `${process.env.HOST}/redirect?${queryString}`
         );
-        res.status(302).end();
-      } else if (param1 === "start") {
-        currentIndex = 0;
+        return res.status(302).end();
       }
 
       currentPost = postsArray[currentIndex];

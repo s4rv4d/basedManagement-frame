@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 async function getBMNFTs() {
@@ -71,7 +78,7 @@ async function fetchDataAndStore() {
 }
 
 function findIndexWithHighestTotalMints(postsArray) {
-  if (!Array.isArray(postsArray) || postsArray.length === 0) {
+  if (postsArray.length === 0) {
     return -1; // return -1 if the data is not an array or is empty
   }
 

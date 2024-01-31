@@ -5,6 +5,11 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  experimental: {
+    // Add this line to disable missingSuspenseWithCSRBailout
+    missingSuspenseWithCSRBailout: false,
+  },
+};
 
 export default config;

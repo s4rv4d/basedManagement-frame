@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
     other: {
       "fc:frame": "vNext",
       "fc:frame:image": "https://i.postimg.cc/Hnv39tmR/based-management.png",
-      "fc:frame:button:1": "View Gallery",
+      "fc:frame:button:1": "View Submissions",
       "fc:frame:post_url": `${process.env.HOST}/api/changeImage?param1="start"`,
     },
     metadataBase: new URL(process.env.HOST ?? ""),
