@@ -39,15 +39,24 @@ export default async function handler(
       totalCount = postsArray.length;
 
       if (buttonIndex === 1) {
-        currentIndex = getPreviousIndex(postsArray, currentIndex);
-      } else if (buttonIndex === 2) {
         currentIndex = getNextIndex(postsArray, currentIndex);
-      } else if (buttonIndex === 3) {
-        currentIndex = totalCount - 1;
+      } else if (buttonIndex === 2) {
+        const selectedData = postsArray[currentIndex];
+
+        const queryParams = {
+          id: selectedData.id,
+        };
+
+        // Convert the query parameters object into a query string
+        const queryString = new URLSearchParams(queryParams).toString();
+
+        res.setHeader(
+          "Location",
+          `${process.env.HOST}/redirect?${queryString}`
+        );
+        res.status(302).end();
       } else if (param1 === "start") {
         currentIndex = 0;
-      } else {
-        currentIndex = findIndexWithHighestTotalMints(postsArray);
       }
 
       currentPost = postsArray[currentIndex];
@@ -62,10 +71,18 @@ export default async function handler(
                   }/api/renderImage?param1=${currentPost.id}&param2=${String(
         currentPost.edition.imageURI
       )}"/>
-                <meta name="fc:frame:button:1" content="⬅️">
-                <meta name="fc:frame:button:2" content="➡️">
-                <meta name="fc:frame:button:3" content="Latest">
-                <meta name="fc:frame:button:4" content="Popular">
+                <meta
+                property="fc:frame:button:1"
+                content="Next"
+              />
+              <meta
+                property="fc:frame:button:2"
+                content="Mint"
+              />
+              <meta
+                property="fc:frame:button:2:action"
+                content="post_redirect"
+              />
                 <meta name="fc:frame:post_url" content="${
                   process.env.HOST
                 }/api/changeImage">

@@ -64,7 +64,7 @@ async function fetchDataAndStore() {
     const data = await getBMNFTs(); // Call your function
     // postsArray = data.mintBoard.posts.reverse();
     const posts = [...data.mintBoard.posts]; // Create a shallow copy of the posts array
-    return posts.reverse(); // Extract and store the posts
+    return posts; // Extract and store the posts
   } catch (error) {
     console.error("Error fetching data:", error);
   }
