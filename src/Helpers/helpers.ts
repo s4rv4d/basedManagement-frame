@@ -71,7 +71,19 @@ async function fetchDataAndStore() {
     const data = await getBMNFTs(); // Call your function
     // postsArray = data.mintBoard.posts.reverse();
     const posts = [...data.mintBoard.posts]; // Create a shallow copy of the posts array
-    return posts; // Extract and store the posts
+    return posts.reverse(); // Extract and store the posts
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+async function fetchPopularMints() {
+  try {
+    const data = await getBMNFTs(); // Call your function
+    // postsArray = data.mintBoard.posts.reverse();
+    const posts = [...data.mintBoard.posts]; // Create a shallow copy of the posts array
+    const reorderPosts = posts.sort((a, b) => b.totalMints - a.totalMints);
+    return reorderPosts; // Extract and store the posts
   } catch (error) {
     console.error("Error fetching data:", error);
   }
