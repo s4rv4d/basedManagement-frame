@@ -18,7 +18,6 @@ import {
 import url from "url";
 
 let postsArray = [];
-// let currentIndex = 0;
 let totalCount = 0;
 let currentPost;
 let userSalt = "";
